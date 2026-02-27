@@ -1,45 +1,38 @@
 #include <iostream>
 using namespace std;
 
-//Нерекурсивная функция, для больших Фибоначчей
-long long int *fibonachi(int size);
+//Рекурсивная функция, для малых Фибоначчей
+long long int fibonachi(int a);
 
 int main()
 {
-	int size{};
-
-	cout << "Введите чиcло: ";
-	cin >> size;
-
+	int a{};
+	
+	cout << "Введите число: ";
+	cin >> a;
 	cout << "Числа Фибоначчи: ";
 
-	fibonachi(size);
-	return 0;
+	for (int i = 0; i < a; i++)
+	{
+		cout << fibonachi(i) << " ";
+	}
 }
 
-long long int *fibonachi(int size) 
+long long int fibonachi(int a)
 {
-	const int a = 100;
-	long long int mas[a]{};
 
-	for (int i = 0; i < size; ++i)
+	if (a < 2)
 	{
-		mas[0] = 0;
-		mas[1] = 1;
-
-		for (int j = 1; j < size - 1; ++j)
-		{
-			long long int vremes{ mas[j] };
-			mas[j + 1] = mas[j - 1] + mas[j];
-
-		}
-
+		return a;
 	}
-	
-	for (int element{}; element < size; ++element)
-	{ 
-		cout << mas[element] << " ";
-	} 
+	else
+	{
+		long long int b = fibonachi(a - 1);
+		long long int c = fibonachi(a - 2);
+		long long int d{};
 
-	return mas;
+		d = b + c;
+
+		return d;
+	}
 }
