@@ -8,9 +8,9 @@ int main()
 	int mas_2[]{ 6,5,4,8 };
 	int mas_3[]{ 1,4,3,7,5 };
 
-	int size_1 = sizeof(mas_1) / 4;
-	int size_2 = sizeof(mas_2) / 4;
-	int size_3 = sizeof(mas_3) / 4;
+	int size_1 = sizeof(mas_1) / sizeof(mas_1)[0];
+	int size_2 = sizeof(mas_2) / sizeof(mas_1)[0];
+	int size_3 = sizeof(mas_3) / sizeof(mas_1)[0];
 
 	print(mas_1, size_1);
 	print(mas_2, size_2);
@@ -26,4 +26,5 @@ void print(int* mas, int size)
 		std::cout << mas[i] << " ";
 	}
 	std::cout << "\n";
+
 }
