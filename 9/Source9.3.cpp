@@ -6,7 +6,7 @@ void reverse(int* mas, int size);
 int main()
 {
 	int mas[]{ 1,2,3,4,5,6,7,8,9 };
-	int size = sizeof(mas) / 4;
+	int size = sizeof(mas) / sizeof(mas)[0];
 	
 	std::cout << "До функции reverse: ";
 	print(mas, size);
@@ -37,4 +37,5 @@ void reverse(int* mas, int size)
 		mas[i] = mas[(size - 1) - i];
 		mas[(size - 1) - i] = vremes;
 	}
+
 }
