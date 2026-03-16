@@ -9,8 +9,14 @@ int main()
 	std::cout << "Введите размер массива: ";
 	std::cin >> size; 
 
+	double* arr = create_array(size);	
+
 	std::cout << "Массив: ";
-	create_array(size);
+	for (int i = 0; i < size; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+	delete[] arr;
 	
 	return 0;
 }
@@ -19,10 +25,5 @@ int main()
 double* create_array(int a)
 {
 	double* arr = new double[a]();
-	for (int i = 0; i < a; ++i)
-	{
-		std::cout << arr[i] << " ";
-	}
 	return arr;
-	delete[] arr;
 }
