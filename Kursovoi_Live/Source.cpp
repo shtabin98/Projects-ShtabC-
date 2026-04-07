@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <vector>
 #include <cstdlib>
 #include <windows.h>
 
@@ -9,16 +8,17 @@ bool** create_array(int row, int col);
 void print_ar(bool** ar, int row, int col, int& counter_live);
 void pereprint_ar(bool** ar, bool** ar2, int row, int col);
 void brotherhood(bool** ar, int i, int j, int row, int col, int& c);
+void delete_array(bool** ar, int size_str, int size_col);
 
 int main()
 {
 	std::ifstream fin{ "in.txt" };
-	int counter_live{ 0 };//Счетчик живых клеток
+	std::ifstream fan{ "in.txt" };
 
-	if (fin.is_open())
+	if (fin.is_open() && fan.is_open())
 	{
+		int counter_live_1{ 0 };//Счетчик живых клеток для первого поколения
 		std::string s{};
-
 		fin >> s;
 		int row = std::stoi(s);//Записываю кол-во строк
 
@@ -30,7 +30,7 @@ int main()
 		bool** ar2 = create_array(row, col);//И второй, для времменого перезаписывания
 
 		//Проверка на заполненность.
-		if (!(fin >> s))
+		if (!(fan >> s))
 		{
 			pereprint_ar(ar, ar2, row, col);
 		}
@@ -40,34 +40,23 @@ int main()
 		{
 			for (int j = 0; j < col; ++j)
 			{
-				if (fin.eof())
-				{
-					if (ar[i][j] != true)
-					{
-						ar[i][j] = false;
-					}
-				}
-				else
+				while (!fin.eof())
 				{
 					fin >> s;
 					int x = std::stoi(s);
 					fin >> s;
 					int y = std::stoi(s);
 					ar[x][y] = true;
-					if (ar[i][j] != true)
-					{
-						ar[i][j] = false;
-					}
 				}
 			}
 		}
-		fin.close();//Закрываю файл после использования
+		fan.close();fin.close();//Закрываю файлы после использования
 
-		print_ar(ar, row, col, counter_live);//Вывожу на терминал первое поколение
+		print_ar(ar, row, col, counter_live_1);//Вывожу на терминал первое поколение
 
-		for (int y = 1; y < 10000 ; y++)//Cчетчик итераций
+		for (int y = 1; y < 10000; y++)//Cчетчик итераций
 		{
-			int counter_live{ 0 };//Счетчик живых клеток
+			int counter_live_all{ 0 };//Счетчик живых клеток
 			int kon{ 0 };//Счетчик для остановы цикла по стагнации
 
 			//Перезаписываю массив
@@ -90,7 +79,7 @@ int main()
 						}
 						else (ar2[i][j] = false);
 					};
-						break;
+					break;
 					//Проверяю живые клетки на наличие соседей
 					case true:
 					{
@@ -102,16 +91,16 @@ int main()
 						}
 						else (ar2[i][j] = false);
 					};
-						break;
+					break;
 					}
 				}
 			}
-				
+
 			std::system("cls");//Очистка экрана терминала перед следующей итерацией
-			print_ar(ar2, row, col, counter_live);
+			print_ar(ar2, row, col, counter_live_all);
 
 			//Проверка на колличество живых клеток.
-			if (counter_live == 0)
+			if (counter_live_all == 0)
 			{
 				std::cout << "Живых клеток больше нет, игра окончена:(" << std::endl;
 				break;
@@ -138,7 +127,9 @@ int main()
 			//Перезаписываю массив
 			pereprint_ar(ar, ar2, row, col);
 		}
-		delete[] ar,ar2;//Очищаю память
+		//Очищаю память
+		delete_array(ar, row, col); 
+		delete_array(ar2, row, col);
 	}
 	return 0;
 }
@@ -155,7 +146,7 @@ bool** create_array(int row, int col)
 }
 
 //Функция вывода на терминал
- void print_ar(bool** ar, int row, int col, int &counter_live)
+void print_ar(bool** ar, int row, int col, int& counter_live)
 {
 	static int counter = 1;
 	for (int i = 0; i < row; ++i)
@@ -177,30 +168,40 @@ bool** create_array(int row, int col)
 	Sleep(1000);//Задержка времени вывода одна секунд
 }
 
- //Функция перезаписывания массивов на терминал
- void pereprint_ar(bool** ar, bool** ar2, int row, int col)
- {
-	 for (int i = 0; i < row; ++i)
-	 {
-		 for (int j = 0; j < col; ++j)
-		 {
-			 ar[i][j] = ar2[i][j];
-		 }
-	 }
- }
+//Функция перезаписывания массивов на терминал
+void pereprint_ar(bool** ar, bool** ar2, int row, int col)
+{
+	for (int i = 0; i < row; ++i)
+	{
+		for (int j = 0; j < col; ++j)
+		{
+			ar[i][j] = ar2[i][j];
+		}
+	}
+}
 
- //Функция для проверки соседей клетки
- void brotherhood(bool** ar, int i, int j, int row, int col, int& c)
+//Функция для проверки соседей клетки
+void brotherhood(bool** ar, int i, int j, int row, int col, int& c)
+{
+	for (int l = 0; l < 8; ++l)
+	{
+		int ir[8]{ -1, 0, +1, -1, +1, -1, 0, +1 };
+		int jc[8]{ -1, -1, -1, 0, 0, +1, +1, +1 };
+		int ni = i + ir[l];
+		int nj = j + jc[l];
+		if (ni >= 0 && ni < row && nj >= 0 && nj < col && ar[ni][nj] == true)
+		{
+			++c;
+		}
+	}
+}
+
+ //Функция очистки памяти
+ void delete_array(bool** ar, int size_str, int size_col)
  {
-	 for (int l = 0; l < 8; ++l)
+	 for (int i = 0; i < size_str; ++i)
 	 {
-		 int ir[8]{ -1, 0, +1, -1, +1, -1, 0, +1 };
-		 int jc[8]{ -1, -1, -1, 0, 0, +1, +1, +1 };
-		 int ni = i + ir[l];
-		 int nj = j + jc[l];
-		 if (ni >= 0 && ni < row && nj >= 0 && nj < col && ar[ni][nj] == true)
-		 {
-			 ++c;
-		 }
+		 delete[] ar[i];
 	 }
+	 delete[] ar;
  }
