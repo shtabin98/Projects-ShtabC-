@@ -2,55 +2,69 @@
 
 class Counter
 {
-	size_t __num{ 1 };
-
+	int __num{ 1 };
 public:
-	void task_1(std::string task)
+
+	Counter(int num) 
 	{
-		if (task == "да")
-		{
-			std::cout << "Введите начальное значение счетчика: ";
-			std::cin >> __num;
-		}
+		__num = num;
+	};
+	Counter() {};
+
+	void plus()
+	{
+		this->__num += 1;
 	}
-	void task_2(std::string task)
+
+	void minus()
 	{
-		if (task == "+")
-		{
-			__num += 1;
-		}
-		else if (task == "-")
-		{
-			__num -= 1;
-		}
-		else if (task == "=")
-		{
-			std::cout << __num << std::endl;
-		}
-		else if (task == "x" || task == "х")
-		{
-			std::cout << "До свидания\n";
-		}
+		this->__num -= 1;
+	}
+
+	int ravno(int num)
+	{
+		num = this->__num;
+		return __num;
 	}
 };
 
 
 int main()
 {
-	Counter count;
 	std::string task;
+	int num{};
 
 	std::cout << "Вы хотите указать начальное значение счетчика ? Введите да или нет: ";
 	std::cin >> task;
-	count.task_1(task);
+	if (task == "да")
+	{
+		std::cout << "Введите начальное значение счетчика: ";
+		std::cin >> num;
+	}
+	else num = 1;
+
+	Counter count(num);
+
 	do
 	{
 		std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
 		std::cin >> task;
-		count.task_2(task);
 		if (task == "x" || task == "х")
 		{
+			std::cout << "До свидания\n";
 			return 0;
+		}
+		else if (task == "+")
+		{
+			count.plus();
+		}
+		else if (task == "-")
+		{
+			count.minus();
+		}
+		else if (task == "=")
+		{
+			std::cout << count.ravno(num) << std::endl;
 		}
 	} while (true);
 	
