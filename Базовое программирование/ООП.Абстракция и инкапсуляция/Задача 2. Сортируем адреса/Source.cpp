@@ -18,10 +18,10 @@ public:
 	};
 	Adress() {};
 
-	std::string get_City() { return __City; };
-	std::string get_Street() { return __Street; };
-	int get_House() { return __House; };
-	int get_kv() { return __kv; };
+	std::string get_City() const { return __City; };
+	std::string get_Street() const { return __Street; };
+	int get_House() const { return __House; };
+	int get_kv() const { return __kv; };
 };
 
 int main()
@@ -47,21 +47,18 @@ int main()
 			fin >> House;
 			fin >> kv;
 			ar[i] = { City,Street, House, kv };
-		}
+		};
 
-		Adress ar1[1]; 
-		for (int i = 0; i < size; i++) 
-		{
-			for (int j = 0; j < size - 1; j++) 
+		for (int i = 0; i < size; i++)
 			{
-				if (ar[j].get_City() > ar[j + 1].get_City())
+				for (int j = 0; j < size - 1; j++) 
 				{
-					ar1[0] = ar[j]; 
-					ar[j] = ar[j + 1]; 
-					ar[j + 1] = ar1[0]; 
+					if (ar[j].get_City() > ar[j + 1].get_City())
+					{
+						std::swap(ar[j], ar[i]);
+					}
 				}
 			}
-		}
 
 		std::ofstream fout{ "out.txt" };
 
@@ -76,6 +73,7 @@ int main()
 				fout << ar[i].get_kv() << std::endl;
 			}
 		}
+		delete[] ar;
 	}
 	fin.close();
 	return 0;
