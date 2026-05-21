@@ -18,10 +18,10 @@ class Adress
 		};
 		Adress() {};
 
-		std::string get_City() { return __City; };
-		std::string get_Street() { return __Street; };
-		int get_House() { return __House; };
-		int get_kv() { return __kv; };
+		std::string get_City() const { return __City; };
+		std::string get_Street() const { return __Street; };
+		int get_House() const { return __House; };
+		int get_kv() const { return __kv; };
 	};
 
 int main()
@@ -62,8 +62,10 @@ int main()
 				fout << ar[i].get_kv() << std::endl;
 			}
 		}
+		delete[] ar;
 	}
 	fin.close();
+
 	return 0;
 }
 
