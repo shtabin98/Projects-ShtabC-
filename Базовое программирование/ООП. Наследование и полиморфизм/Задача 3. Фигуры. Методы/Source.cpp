@@ -232,8 +232,6 @@ int main()
 	print_info(fi);
 
 	treu tre;
-	treu* gu{ &tre };
-	//std::cout << gu->vshivost();
 	print_info(tre);
 
 	pryamougolnyi tr;
