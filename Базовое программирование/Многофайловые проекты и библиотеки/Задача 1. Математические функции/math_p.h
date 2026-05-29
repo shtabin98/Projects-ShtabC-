@@ -1,10 +1,10 @@
 #ifndef math_p
 #define math_p
 
-double plus(double i, double j);
-double minus(double i, double j);
-double umn(double i, double j);
-double delen(double i, double j);
-double stepen(double i, double j);
+double addition(double i, double j);
+double subtraction(double i, double j);
+double multiplication(double i, double j);
+double division(double i, double j);
+double exponentiation(double i, double j);
 
 #endif
