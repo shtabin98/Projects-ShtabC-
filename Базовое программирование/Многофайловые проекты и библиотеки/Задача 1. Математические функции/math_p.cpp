@@ -1,27 +1,27 @@
 #include "math_p.h"
 #include <cmath>
 
-double plus(double i, double j)
+double addition(double i, double j)
 {
 	return i + j;
 };
 
-double minus(double i, double j)
+double subtraction(double i, double j)
 {
 	return i - j;
 };
 
-double umn(double i, double j)
+double multiplication(double i, double j)
 {
 	return i * j;
 };
 
-double delen(double i, double j)
+double division(double i, double j)
 {
 	return i / j;
 };
 
-double stepen(double i, double j)
+double exponentiation(double i, double j)
 {
 	return pow(i,j);
 };
