@@ -1,16 +1,16 @@
 #include "Classnyi.h"
 
-void Counter::plus()
+void Counter::add()
 {
 	this->__num += 1;
 };
 
-void Counter::minus()
+void Counter::subtract()
 {
 	this->__num -= 1;
 };
 
-int Counter::ravno()
+int Counter::equality()
 {
 	return __num;
 };
