@@ -28,15 +28,15 @@ int main()
 		}
 		else if (task == "+")
 		{
-			count.plus();
+			count.add();
 		}
 		else if (task == "-")
 		{
-			count.minus();
+			count.subtract();
 		}
 		else if (task == "=")
 		{
-			std::cout << count.ravno() << std::endl;
+			std::cout << count.equality() << std::endl;
 		}
 	} while (true);
 
