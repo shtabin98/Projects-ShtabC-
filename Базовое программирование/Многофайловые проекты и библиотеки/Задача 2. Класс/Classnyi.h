@@ -4,7 +4,7 @@ class Counter
 {
 	int __num{ 1 };
 public:
-	void plus(); void minus(); int ravno();
+	void add(); void substract(); int equality();
 	Counter(int num)
 	{
 		__num = num;
