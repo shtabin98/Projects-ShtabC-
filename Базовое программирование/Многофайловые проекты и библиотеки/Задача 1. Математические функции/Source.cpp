@@ -15,24 +15,21 @@ int main()
 	switch (pes)
 	{
 	case 1:
-		std::cout << i << " + " << j << " = " << plus(i, j);
+		std::cout << i << " + " << j << " = " << addition(i, j);
 		break;
 	case 2:
-		std::cout << i << " - " << j << " = " << minus(i, j);
+		std::cout << i << " - " << j << " = " << subtraction(i, j);
 		break;
 	case 3:
-		std::cout << i << " * " << j << " = " << umn(i, j);
+		std::cout << i << " * " << j << " = " << multiplication(i, j);
 		break;
 	case 4:
-		std::cout << i << " / " << j << " = " << delen(i, j);
+		std::cout << i << " / " << j << " = " << division(i, j);
 		break;
 	case 5:
-		std::cout << i << " в степени " << j << " = " << stepen(i, j);
+		std::cout << i << " в степени " << j << " = " << exponentiation(i, j);
 		break;
 	}
-
-
-
 	return 0;
 }
 
