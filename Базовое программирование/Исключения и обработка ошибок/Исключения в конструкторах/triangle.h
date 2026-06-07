@@ -7,6 +7,5 @@ class triangle
 {
 public:
 	triangle();
-	virtual bool virt_method();
 	virtual void print_info() const;
 };

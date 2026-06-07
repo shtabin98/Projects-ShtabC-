@@ -5,6 +5,5 @@ class isosceles :
 {
 public:
     isosceles();
-    virtual bool virt_method();
 };
 

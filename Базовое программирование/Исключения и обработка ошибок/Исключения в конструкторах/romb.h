@@ -5,6 +5,5 @@ class romb :
 {
 public:
     romb();
-    virtual bool virt_method();
 };
 

@@ -5,6 +5,5 @@ class parallelogram :
 {
 public:
     parallelogram();
-    virtual bool virt_method();
 };
 

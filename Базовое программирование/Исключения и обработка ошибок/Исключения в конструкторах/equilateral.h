@@ -5,6 +5,5 @@ class equilateral :
 {
 public:
     equilateral();
-    virtual bool virt_method();
 };
 

@@ -5,6 +5,5 @@ class rectangle :
 {
 public:
     rectangle();
-    virtual bool virt_method();
 };
 

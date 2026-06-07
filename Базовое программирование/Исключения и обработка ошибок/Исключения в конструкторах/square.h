@@ -5,6 +5,5 @@ class square :
 {
  public:
      square();
-     virtual bool virt_method();
 };
 

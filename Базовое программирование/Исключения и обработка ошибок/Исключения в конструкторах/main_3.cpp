@@ -6,7 +6,6 @@ int main()
 	try
 	{
 		figure figure;
-		figure.virt_method();
 		figure.print_info();
 	}
 	catch (const expection& e ) {std::cout << e.get_expect() << std::endl;}
@@ -16,7 +15,6 @@ int main()
 	try
 	{
 		triangle triangle;
-		triangle.virt_method();
 		triangle.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -26,7 +24,6 @@ int main()
 	try
 	{
 		rectangular rectangular;
-		rectangular.virt_method();
 		rectangular.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -36,7 +33,6 @@ int main()
 	try
 	{
 		isosceles isosceles;
-		isosceles.virt_method();
 		isosceles.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -46,7 +42,6 @@ int main()
 	try
 	{
 		equilateral equilateral;
-		equilateral.virt_method();
 		equilateral.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -56,7 +51,6 @@ int main()
 	try
 	{
 		quadrilateral quadrilateral;
-		quadrilateral.virt_method();
 		quadrilateral.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -66,7 +60,6 @@ int main()
 	try
 	{
 		rectangle rectangle;
-		rectangle.virt_method();
 		rectangle.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -76,7 +69,6 @@ int main()
 	try
 	{
 		square square;
-		square.virt_method();
 		square.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -86,7 +78,6 @@ int main()
 	try
 	{
 		parallelogram parallelogram;
-		parallelogram.virt_method();
 		parallelogram.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
@@ -96,7 +87,6 @@ int main()
 	try
 	{
 		romb romb;
-		romb.virt_method();
 		romb.print_info();
 	}
 	catch (const expection& e) { std::cout << e.get_expect() << std::endl; }
