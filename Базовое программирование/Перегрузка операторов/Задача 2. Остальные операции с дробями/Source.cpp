@@ -2,40 +2,41 @@
 #include <string>
 #include <numeric>
 
+#include <cassert>
+
 class Fraction
 {
 private:
 	int numerator_;
 	int denominator_;
-
+	
 public:
 	Fraction(int numerator, int denominator)
 	{
-		numerator_ = numerator;
-		denominator_ = denominator;
+		int gcd = std::gcd(numerator, denominator);
+		numerator_ = numerator / gcd;
+		denominator_ = denominator / gcd;
 	}
 
-	std::string dump(int numerator, int denominator)
+	std::string dump()
 	{
 		
-		return std::to_string(numerator) + "/" + std::to_string(denominator);
+		return std::to_string(numerator_) + "/" + std::to_string(denominator_);
 	}
 
 	Fraction operator+(Fraction other)
 	{ 
-		int nok = std::lcm(denominator_, other.denominator_);
-
-		int new_numerator = numerator_ * (nok / denominator_) + other.numerator_ * (nok / other.denominator_);
-		int new_denominator = nok;
+		int new_denominator = std::lcm(denominator_, other.denominator_);
+		int new_numerator = numerator_ * (new_denominator / denominator_) 
+			+ other.numerator_ * (new_denominator / other.denominator_);
 		return Fraction(new_numerator, new_denominator);
 	}
 
 	Fraction operator-(Fraction other)
 	{
-		int nok = std::lcm(denominator_, other.denominator_);
-
-		int new_numerator = numerator_ * (nok / denominator_) - other.numerator_ * (nok / other.denominator_);
-		int new_denominator = nok;
+		int new_denominator = std::lcm(denominator_, other.denominator_);
+		int new_numerator = numerator_ * (new_denominator / denominator_)
+			- other.numerator_ * (new_denominator / other.denominator_);
 		return Fraction(new_numerator, new_denominator);
 	}
 
@@ -43,9 +44,6 @@ public:
 	{
 		int new_numerator = numerator_ *  other.numerator_;
 		int new_denominator = denominator_ * other.denominator_;
-		int nod = std::gcd(new_numerator, new_denominator);
-		new_numerator = new_numerator / nod;
-		new_denominator = new_denominator / nod;
 		return Fraction(new_numerator, new_denominator);
 	}
 
@@ -53,31 +51,34 @@ public:
 	{
 		int new_numerator = numerator_ * other.denominator_;
 		int new_denominator = denominator_ * other.numerator_;
-		int nod = std::gcd(new_numerator, new_denominator);
-		new_numerator = new_numerator / nod;
-		new_denominator = new_denominator / nod;
 		return Fraction(new_numerator, new_denominator);
 	}
-
-	int get_numerator() { return numerator_; }
-	int get_denominator() { return denominator_; }
-
 
 	Fraction& operator++()
 	{
 		numerator_ = numerator_ + denominator_;
-		denominator_;
 		return *this;
 	}
 
-	Fraction& operator--()
+	Fraction& operator++(int)
 	{
-		Fraction tmp{ *this };
-		numerator_ = numerator_ + denominator_;
-		denominator_;
+		Fraction tmp = *this;
+		++(*this);
 		return tmp;
 	}
 
+	Fraction& operator--()
+	{	
+		numerator_ = numerator_ - denominator_;
+		return *this;
+	}
+
+	Fraction& operator--(int)
+	{
+		Fraction tmp = *this;
+		--(*this);
+		return tmp;
+	}
 };
 
 int main()
@@ -100,30 +101,19 @@ int main()
 	Fraction sub = f1 - f2;
 	Fraction multi = f1 * f2;
 	Fraction div = f1 / f2;
+
 	Fraction inc = (++f1) * f2;
-	Fraction dec = (--f1) * f2;
+	Fraction f1_copy = f1;
+	Fraction dec = (f1_copy--) * f2;
 
-
-
-	std::cout << f1.dump(numerator_1,denominator_1) << " + " << f2.dump(numerator_2, denominator_2) <<
-		" = " << add.get_numerator() << "/" << add.get_denominator() << "\n";
-
-	std::cout << f1.dump(numerator_1, denominator_1) << " - " << f2.dump(numerator_2, denominator_2) <<
-		" = " << sub.get_numerator() << "/" << sub.get_denominator() << "\n";
-
-	std::cout << f1.dump(numerator_1, denominator_1) << " * " << f2.dump(numerator_2, denominator_2) <<
-		" = " << multi.get_numerator() << "/" << multi.get_denominator() << "\n";
-
-	std::cout << f1.dump(numerator_1, denominator_1) << " / " << f2.dump(numerator_2, denominator_2) <<
-		" = " << div.get_numerator() << "/" << div.get_denominator() << "\n";
-
-	std::cout << "++" << f1.dump(numerator_1, denominator_1) << " * " << f2.dump(numerator_2, denominator_2) <<
-		" = " << inc.get_numerator() << "/" << inc.get_denominator() <<
-		"\nЗначение дроби 1: " << f1.dump(numerator_1, denominator_1) << "\n";
-
-	std::cout << f1.dump(numerator_1, denominator_1) << "--" << " * " << f2.dump(numerator_2, denominator_2) <<
-		" = " << dec.get_numerator() << "/" << dec.get_denominator() <<
-		"\nЗначение дроби 1: " << f1.dump(numerator_1, denominator_1) << "\n";
-
+	std::cout << f1.dump() << " + " << f2.dump() << " = " << add.dump() <<"\n";
+	std::cout << f1.dump() << " - " << f2.dump() << " = " << sub.dump() << "\n";
+	std::cout << f1.dump() << " * " << f2.dump() << " = " << multi.dump() << "\n";
+	std::cout << f1.dump() << " / " << f2.dump() << " = " << div.dump() << "\n";
+	
+	std::cout << "++" << f1.dump() << " * " << f2.dump() << " = " << inc.dump() <<
+		"\nЗначение дроби 1: " << f1.dump() << "\n";
+	std::cout << f1.dump() << "--" << " * " << f2.dump() << " = " << dec.dump() <<
+		"\nЗначение дроби 1: " << f1_copy.dump() << "\n";
 	return 0;
 }
