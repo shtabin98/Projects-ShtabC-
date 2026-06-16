@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="../user_name_dynamic_client/user_name_dynamic_client.vcxproj" />
+  <Project Path="user_name_dynamic_lib.vcxproj" />
+</Solution>
