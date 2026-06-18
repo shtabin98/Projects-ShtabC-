@@ -6,10 +6,12 @@
 	#error "Необходимо определить MODE"
 #endif
 
+#if MODE == 1
 int add(int i, int j)
 {
 	return i + j;
 }
+#endif
 
 int main()
 {
@@ -17,10 +19,6 @@ int main()
 	std::cout << "Работаю в режиме тренировки";
 #elif MODE == 1
 	int i, j;
-	int add(int i, int j)
-	{
-		return i + j;
-	};
 	std::cout << "Работаю в боевом режиме\n";
 	std::cout << "Введите число 1: "; std::cin >> i;
 	std::cout << "Введите число 2: "; std::cin >> j;
