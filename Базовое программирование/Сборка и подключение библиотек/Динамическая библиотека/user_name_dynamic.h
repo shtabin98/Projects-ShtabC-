@@ -14,4 +14,3 @@ namespace user_name_dynamic
 		USER_NAME_DYNAMIC_LIB_API std::string leave(std::string name);
 	};
 }
-

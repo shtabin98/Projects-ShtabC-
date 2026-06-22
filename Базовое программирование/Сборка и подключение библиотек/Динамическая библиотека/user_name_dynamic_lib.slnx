@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="../user_name_dynamic_client/user_name_dynamic_client.vcxproj" />
-  <Project Path="user_name_dynamic_lib.vcxproj" />
+  <Project Path="../user_name_dynamic_client/user_name_dynamic_client.vcxproj" Id="d1c5518b-96ba-4243-b60b-4882b5eaac7e" />
+  <Project Path="user_name_dynamic_lib.vcxproj" Id="1b3f6a58-2506-4c6a-88fa-4e1a1439b6d9" />
 </Solution>
