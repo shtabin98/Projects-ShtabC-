@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.22.0)
 project(user_name_dynamic)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(user_name_dynamic_lib SHARED user_name_dynamic.h user_name_dynamic.cpp)
 add_executable(user_name_dynamic_client user_name_dynamic_client.cpp)
 target_link_libraries(user_name_dynamic_client PRIVATE user_name_dynamic_lib) 
