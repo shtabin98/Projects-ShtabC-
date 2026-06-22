@@ -91,7 +91,7 @@ public:
 	{
 		if (_size == 0)
 		{
-			return 0;
+			return std::make_pair(T{},0);
 		}
 		T max = extended_array[0], cmax = 0, rmax = 0;
 		for (int i = 0; i < _size; i++)

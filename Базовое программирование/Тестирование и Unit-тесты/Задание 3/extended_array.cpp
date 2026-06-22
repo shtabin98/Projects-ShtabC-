@@ -7,5 +7,4 @@ int main()
 	std::cout << ex.mean(4, 6) << std::endl;
 	std::cout << ex.median() << std::endl;
 	std::cout << ex.checkSum();
-	//ex.mode();
 }
