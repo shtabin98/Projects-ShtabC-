@@ -1,17 +1,24 @@
 #include <iostream>
 
-int calc(int* arr,int size, int tchk)
+int countGreater(int* arr,int size, int tchk)
 {
     int ans = 0;
-    
-    for (int i = 0; i < size; ++i)
+    int left = 0;
+    int right = size - 1;
+
+    while (left < right) 
     {
-        if (arr[i] > tchk)
+        int middle = left + (right - left) / 2; 
+        if (arr[middle] <= tchk)
         {
-            ++ans;
+            left = middle + 1;
+        }
+        else
+        {
+            right = middle;
         }
     }
-    return ans;
+    return size - left;
 }
 
 int main()
@@ -22,7 +29,7 @@ int main()
 
     std::cout << "Введите точку отсчета: ";
     std::cin >> tchk;
-    std::cout << "Количество элементов в массиве больших, чем " << tchk << ": " << calc(arr, size, tchk);
+    std::cout << "Количество элементов в массиве больших, чем " << tchk << ": " << countGreater(arr, size, tchk);
 
     return 0;
 }
