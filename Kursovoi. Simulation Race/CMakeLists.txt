@@ -1,8 +1,0 @@
-cmake_minimum_required(VERSION 3.22.0)
-project(Racing)
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-add_library(TS_lib SHARED Transport.cpp Ground.cpp Air.cpp Camel.cpp Camel_runner.cpp Centaur.cpp Allterrain_boots.cpp Flying_carpet.cpp Eagle.cpp Broom.cpp)
-add_library(RACE_lib SHARED Race.cpp Race_ground.cpp Race_Air.cpp)
-add_executable(RacingExe Source.cpp)
-target_link_libraries(RACE_lib PRIVATE TS_lib)
-target_link_libraries(RacingExe PRIVATE RACE_lib)
