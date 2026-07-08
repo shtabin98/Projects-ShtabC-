@@ -1,6 +1,6 @@
-#include "C:\Users\MiAir\source\repos\Базовое программирование\Курсовой проект. Симулятор гонок\Проект\lib\Race.h"
-#include "C:\Users\MiAir\source\repos\Базовое программирование\Курсовой проект. Симулятор гонок\Проект\lib\Race_ground.h"
-#include "C:\Users\MiAir\source\repos\Базовое программирование\Курсовой проект. Симулятор гонок\Проект\lib\Race_Air.h"
+#include "..\lib\Race.h"
+#include "..\lib\Race_ground.h"
+#include "..\lib\Race_Air.h"
 
 #include <iostream>
 #include <iomanip>  
