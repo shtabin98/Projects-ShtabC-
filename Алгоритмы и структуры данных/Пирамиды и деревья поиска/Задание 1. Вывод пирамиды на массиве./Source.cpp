@@ -27,7 +27,7 @@ void print_pyramid(int* arr, int size)
 {
 	std::cout << "Исходный массив: ";
  
-	for (int i = 1; i < size; ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		std::cout << arr[i] << " ";
 	}
