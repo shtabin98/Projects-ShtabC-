@@ -5,9 +5,9 @@ template <class T >
 class functor
 {
 	int remainder{ 0 };
-	std::vector <int> ar{ 4, 1, 3, 6, 25, 54 };
+	std::vector <int> ar;
 public:
-	functor() = default;
+	functor(std::vector <int> ar) : ar(std::move(ar)) {}
 
 	auto get_sum()
 	{
@@ -35,10 +35,20 @@ public:
 
 int main()
 {
-	functor<int> f;
+	std::vector <int> ar;
+	ar.reserve(6);
+	
+	for (int i = 0; i < 6; ++i)
+		{
+			int value{};
+			std::cin >> value;
+			ar.push_back(value);
+		}
 
-	std::cout << "Сумма чисел, делящихся на 3 = " << f.get_sum() << std::endl;
-	std::cout << "Кол-во чисел, делящихся на 3 = " << f.get_count() << std::endl;
+	functor<int> f(ar);
+
+	std::cout << "get_sum() = " << f.get_sum() << std::endl;
+	std::cout << "get_count() = " << f.get_count() << std::endl;
 
 	return 0;
 }
