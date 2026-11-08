@@ -1,51 +1,37 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 template <class T >
 class functor
 {
-	int remainder{ 0 };
-	std::vector <int> ar;
+	int count{0};
+	int sum{0};
+	std::vector <int> ar{ 4, 1, 3, 6, 25, 54 };
 public:
-	functor(std::vector <int> ar) : ar(std::move(ar)) {}
+	functor() {}
 
-	auto get_sum()
+	void operator ()()
 	{
-		auto sum{ 0 };
 		for (int i = 0; i < ar.size(); ++i)
 		{
-			if (ar[i] % 3 == remainder)
+			if (ar[i] % 3 == 0)
+			{
 				sum += ar[i];
+				++count;
+			}
 		}
-		return sum;
 	}
 
-	auto get_count()
-	{
-		auto count{ 0 };
-		for (int i = 0; i < ar.size(); ++i)
-		{
-			if (ar[i] % 3 == remainder)
-				++count;
-		}
-		return count;
-	}
+	int get_sum() const { return sum;}
+	int get_count() const {return count;}
 };
 
 
 int main()
 {
-	std::vector <int> ar;
-	ar.reserve(6);
-	
-	for (int i = 0; i < 6; ++i)
-		{
-			int value{};
-			std::cin >> value;
-			ar.push_back(value);
-		}
-
-	functor<int> f(ar);
+	functor<int> f;
+	f();
 
 	std::cout << "get_sum() = " << f.get_sum() << std::endl;
 	std::cout << "get_count() = " << f.get_count() << std::endl;
