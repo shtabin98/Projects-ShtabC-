@@ -1,13 +1,13 @@
 #include <iostream>
-#include <vector>
 #include <utility>
-#include <cstring>
 #include <algorithm>
 #include <string>
 
 class big_integer
 {
 	std::string integer;
+    struct raw_t {};
+    big_integer(raw_t, std::string digits) : integer(std::move(digits)) {}
 
 public:
 	big_integer() : integer("0") {}
@@ -22,7 +22,10 @@ public:
     big_integer& operator=(const big_integer&) = default;
 
 	big_integer(big_integer&& other) noexcept  
-		: integer(std::move(other.integer)) {}
+		: integer(std::move(other.integer)) 
+    {
+        other.integer = "0";
+    }
 
 	big_integer& operator= (big_integer&& other) noexcept 
 	{
@@ -46,7 +49,7 @@ public:
             res.push_back(static_cast<char>('0' + sum % 10));
             carry = sum / 10;
         }
-        return big_integer(std::move(res));
+        return big_integer(raw_t{},std::move(res));
     }
 
     big_integer operator*(int rhs) const
@@ -60,13 +63,13 @@ public:
             res.push_back(static_cast<char>('0' + cur % 10));
             carry = static_cast<int>(cur / 10);
         }
-        while (res.size() > 1 && res.back() == '0') res.pop_back(); // ведущие нули
-        return big_integer(std::move(res));
+        while (res.size() > 1 && res.back() == '0') res.pop_back(); 
+        return big_integer(raw_t{}, std::move(res));
     }
 
     friend std::ostream& operator<<(std::ostream& os, const big_integer& x)
     {
-        return os << std::string(x.integer.begin(), x.integer.end());
+        return os << std::string(x.integer.rbegin(), x.integer.rend());
     }
 
 };
